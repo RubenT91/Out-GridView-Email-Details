@@ -1,0 +1,1 @@
+Get-Mailbox -ResultSize Unlimited | Select-Object DisplayName,ArchiveStatus,WhenMailboxCreated,PrimarySmtpAddress, @{Name="EmailAddresses";Expression={($_.EmailAddresses | Where-Object {$_ -clike "smtp*"} | ForEach-Object {$_ -replace "smtp:",""}) -join ","}} | Sort-Object DisplayName | Out-GridView
